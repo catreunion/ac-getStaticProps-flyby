@@ -1,23 +1,12 @@
 import Head from "next/head"
-import { ApolloClient, InMemoryCache, useQuery, gql } from "@apollo/client"
+import { gql } from "@apollo/client"
+import apolloClient from "../apolloClient"
 import Locations from "../comp/Locations"
 
 export const getStaticProps = async () => {
-  // 1. initialize an ApolloClient instance
-  // 2. pass a configuration object to its constructor
-  const client = new ApolloClient({
-    // specify the URL of GraphQL server / endpoint
-    // the FlyBy GraphQL API from Apollo Odyssey's Voyage tutorial series
-    uri: "https://flyby-gateway.herokuapp.com/",
-    // uri: "https://api-eu-central-1.hygraph.com/v2/ck8sn5tnf01gc01z89dbc7s0o/master",
-    // create an instance of InMemoryCache
-    // used to cache query results
-    cache: new InMemoryCache()
-  })
-
   // wrap the query in the gql template literal
   // gql provides logic for parsing GraphQL queries
-  const { data } = await client.query({
+  const { data } = await apolloClient.query({
     query: gql`
       query getLocations {
         locations {
