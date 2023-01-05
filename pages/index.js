@@ -1,11 +1,9 @@
 import Head from "next/head"
-import { gql } from "@apollo/client"
 import apolloClient from "../apolloClient"
+import { gql } from "@apollo/client"
 import Locations from "../comp/Locations"
 
 export const getStaticProps = async () => {
-  // wrap the query in the gql template literal
-  // gql provides logic for parsing GraphQL queries
   const { data } = await apolloClient.query({
     query: gql`
       query getLocations {
